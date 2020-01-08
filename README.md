@@ -1,4 +1,6 @@
 ## Set up local cloud stacks with Docker Compose
+![logo](logo.png)
+
 #### Dependencies
 - `docker`
 - `docker-compose`
