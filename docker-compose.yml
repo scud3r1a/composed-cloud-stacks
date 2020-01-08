@@ -1,0 +1,99 @@
+version: "3"
+
+services:
+
+    # user_interface:
+        # container_name: "user_interface"
+        # image: nginx
+        # volumes:
+            # - ./services/user_interface:/usr/share/nginx/html:ro
+        # ports:
+            # - 80:80
+
+    jupyter:
+        container_name: "jupyter"
+        # image: jupyter/scipy-notebook
+        build: services/jupyter
+        volumes:
+            - jupyter_volume:/home/jovyan/data
+        network_mode: host
+        ports:
+            - 8888:8888
+
+    spark-flask-api:
+        container_name: "spark-flask-api"
+        build: services/spark-flask-api
+        volumes:
+            - ./services/spark-flask-api/test:/data
+        network_mode: host
+        ports:
+            - 4040:4040
+            - 5000:5000
+
+    superset:
+        container_name: "superset"
+        image: tylerfowler/superset
+        ports:
+            - 8088:8088
+
+    # mysql:
+        # container_name: "mysql"
+        # image: mysql
+        # command: --default-authentication-plugin=mysql_native_password
+        # environment:
+            # - MYSQL_ROOT_PASSWORD=password
+        # network_mode: host
+        # ports:
+            # - 3306:3306
+            # - 33060:33060
+
+    #postgres:
+    #    container_name: "postgres"
+    #    image: postgres
+    #    volumes:
+    #        - postgres_volume:/var/lib/postgresql/
+    #    ports:
+    #        - 5432:5432
+
+    #redis:
+    #    container_name: "redis"
+    #    image: bitnami/redis
+    #    environment:
+    #        - ALLOW_EMPTY_PASSWORD=yes
+    #        - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    #    volumes:
+    #        - redis_volume:/bitnami/redis
+    #    ports:
+    #        - 6379:6379
+
+    # minio:
+        # container_name: "minio"
+        # build: services/minio
+        # volumes:
+            # - minio_volume:/var/lib/minio
+        # ports:
+            # - 9000:9000
+
+    #kepler.gl:
+    #    container_name: "kepler.gl"
+    #    build: services/kepler.gl
+    #    volumes:
+    #        - kepler.gl_volume:/data
+    #    ports:
+    #        - 8080:8080
+
+    #apistar:
+    #    container_name: "apistar"
+    #    build: services/apistar
+    #    volumes:
+    #        - ./services/apistar/api:/usr/src/app
+    #
+    #    ports:
+    #        - 8000:8000
+    #    command: gunicorn app:app -b 0.0.0.0:8000
+
+volumes:
+    jupyter_volume:
+    # redis_volume:
+    # kepler.gl_volume:
+    # minio_volume:

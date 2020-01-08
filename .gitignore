@@ -1,0 +1,18 @@
+# Services
+services/apistar
+services/gmplot
+services/kepler.gl
+services/user_interface
+services/minio
+
+# Icons
+logo*
+!logo.png
+
+# Development files
+.idea
+env.sh
+test.py
+requirements.txt
+push.sh
+test.py
